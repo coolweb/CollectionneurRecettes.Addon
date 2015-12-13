@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="CollectionneurRecettes.Addon.Client.Views.Parameters"
+            xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:viewModel="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"          
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CollectionneurRecettes.Addon.Client.Views"
+             mc:Ignorable="d" 
+             viewModel:ViewModelLocator.AutoWireViewModel="True" >
+    <Grid>
+        <TabControl>
+            <TabControl.Items>
+                <TabItem Header="Général">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal" Margin="0,10">
+                            <TextBox Controls:TextBoxHelper.Watermark="Base de données Collectionneur de recettes" Width="250" Text="{Binding CollectionneurRecetteDbPath}" />
+                            <Button Content="Sélectionner..." Command="{Binding SelectCollectionneurDbPathCommand}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="1" Margin="0,10">
+                            <TextBlock Text="Nombre de jour dans le passé à synchroniser" FontSize="16" FontFamily="Segoe UI Semibold" Foreground="#FF000000" />
+                            <Controls:NumericUpDown Grid.Row="1" Width="75" HorizontalAlignment="Left" Value="{Binding DaysToSyncBefore}" Minimum="0" Maximum="7" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0,10">
+                            <TextBlock Text="Nombre de jour dans le futur à synchroniser" FontSize="16" FontFamily="Segoe UI Semibold" Foreground="#FF000000" />
+                            <Controls:NumericUpDown Grid.Row="1" Width="75" HorizontalAlignment="Left" Value="{Binding DaysToSyncAfter}" Minimum="0" Maximum="7" />
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Gmail">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Controls:ToggleSwitch Header="Actif" Grid.Column="0" IsChecked="{Binding IsGmailAccountAlreadyConfigured}" />
+                        <ComboBox Grid.Row="1" ItemsSource="{Binding Calendars}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedCalendar}" />
+                    </Grid>
+                </TabItem>
+            </TabControl.Items>
+        </TabControl>
+        <Controls:ProgressRing IsActive="{Binding IsLoading}" />
+    </Grid>
+</UserControl>

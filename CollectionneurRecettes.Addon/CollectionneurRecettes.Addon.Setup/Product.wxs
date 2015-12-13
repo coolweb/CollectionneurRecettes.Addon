@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Name="CollectionneurRecettes.Addon.Setup" Language="1033" Version="1.0.0.0" Manufacturer="Jordens Christophe" UpgradeCode="28c41b0a-e3f7-49fd-888a-f5e823d56769">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <!--<MediaTemplate />-->
+
+    <Media Id="1" EmbedCab="yes" Cabinet="Install.cab" />
+
+    <Feature Id="ProductFeature" Title="CollectionneurRecettes.Addon" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+      <ComponentRef Id="ProgramMenuDir" />    
+    </Feature>
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="CollectionneurRecettes.Addon" />      
+      </Directory>
+      <Directory Id="ProgramMenuFolder" Name="Programs">
+        <Directory Id="ProgramMenuDir" Name="CollectionneurRecettesAddon">
+          <Component Id="ProgramMenuDir" Guid="C0CAAAED-247A-4A1C-BCE9-978086CF443A">
+            <RemoveFolder Id='ProgramMenuDir' On='uninstall' />
+            <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
+          </Component>
+        </Directory>
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <Icon Id="Client.exe" SourceFile="..\CollectionneurRecettes.Addon.Client\bin\Release\CollectionneurRecettes.Addon.Client.exe"/>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">      
+      <Component Id="ProductComponent" Guid="F3BDAF26-98AF-4B24-9134-1F0E8FBE3971">
+        <File Id="CollectionneurRecettesAddonExe" Name="CollectionneurRecettes.Addon.Client.exe" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\CollectionneurRecettes.Addon.Client.exe" KeyPath="yes">          
+          <Shortcut Id="startmenuManual" Directory="ProgramMenuDir" Name="Collectionneur Addon" Advertise="yes" Icon="Client.exe" IconIndex="0" />
+        </File>        
+        <File Id="AutoMapper" Name="AutoMapper.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\AutoMapper.dll"  />
+        <File Id="clientSecrets" Name="client_secrets.json" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\client_secrets.json"  />
+        <File Id="CollectionneurRecettesAddonClientExeConfig" Name="CollectionneurRecettes.Addon.Client.exe.config" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\CollectionneurRecettes.Addon.Client.exe.config"  />
+        <File Id="CollectionneurRecettesAddon" Name="CollectionneurRecettes.Addon.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\CollectionneurRecettes.Addon.dll"  />
+        <File Id="GoogleApisAuth" Name="Google.Apis.Auth.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\Google.Apis.Auth.dll"  />
+        <File Id="GoogleApisAuthPlatformServices" Name="Google.Apis.Auth.PlatformServices.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\Google.Apis.Auth.PlatformServices.dll"  />
+        <File Id="GoogleApisCalendarV3" Name="Google.Apis.Calendar.v3.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\Google.Apis.Calendar.v3.dll"  />
+        <File Id="GoogleApisCore" Name="Google.Apis.Core.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\Google.Apis.Core.dll"  />
+        <File Id="GoogleApis" Name="Google.Apis.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\Google.Apis.dll"  />
+        <File Id="GoogleApisOauth2V1" Name="Google.Apis.Oauth2.v1.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\Google.Apis.Oauth2.v1.dll"  />
+        <File Id="GoogleApisPlatformServices" Name="Google.Apis.PlatformServices.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\Google.Apis.PlatformServices.dll"  />
+        <File Id="H2Latest" Name="h2-latest.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\h2-latest.dll"  />
+        <File Id="H2Sharp" Name="H2Sharp.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\H2Sharp.dll"  />
+        <File Id="HardcodetWpfTaskbarNotification" Name="Hardcodet.Wpf.TaskbarNotification.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\Hardcodet.Wpf.TaskbarNotification.dll"  />
+        <File Id="IKVMAWTWinForms" Name="IKVM.AWT.WinForms.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\IKVM.AWT.WinForms.dll"  />
+        <File Id="IKVMOpenJDKBeans" Name="IKVM.OpenJDK.Beans.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\IKVM.OpenJDK.Beans.dll"  />
+        <File Id="IKVMOpenJDKCharsets" Name="IKVM.OpenJDK.Charsets.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\IKVM.OpenJDK.Charsets.dll"  />
+        <File Id="IKVMOpenJDKCorba" Name="IKVM.OpenJDK.Corba.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\IKVM.OpenJDK.Corba.dll"  />
+        <File Id="IKVMOpenJDKCore" Name="IKVM.OpenJDK.Core.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\IKVM.OpenJDK.Core.dll"  />
+        <File Id="IKVMOpenJDKJdbc" Name="IKVM.OpenJDK.Jdbc.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\IKVM.OpenJDK.Jdbc.dll"  />
+        <File Id="IKVMOpenJDKManagement" Name="IKVM.OpenJDK.Management.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\IKVM.OpenJDK.Management.dll"  />
+        <File Id="IKVMOpenJDKMedia" Name="IKVM.OpenJDK.Media.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\IKVM.OpenJDK.Media.dll"  />
+        <File Id="IKVMOpenJDKMisc" Name="IKVM.OpenJDK.Misc.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\IKVM.OpenJDK.Misc.dll"  />
+        <File Id="IKVM.OpenJDK.Naming" Name="IKVM.OpenJDK.Naming.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\IKVM.OpenJDK.Naming.dll"  />
+        <File Id="IKVMOpenJDKSecurity" Name="IKVM.OpenJDK.Security.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\IKVM.OpenJDK.Security.dll"  />
+        <File Id="IKVMOpenJDKRemoting" Name="IKVM.OpenJDK.Remoting.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\IKVM.OpenJDK.Remoting.dll"  />
+        <File Id="IKVMOpenJDKSwingAWT" Name="IKVM.OpenJDK.SwingAWT.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\IKVM.OpenJDK.SwingAWT.dll"  />
+        <File Id="IKVMOpenJDKText" Name="IKVM.OpenJDK.Text.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\IKVM.OpenJDK.Text.dll"  />
+        <File Id="IKVMOpenJDKUtil" Name="IKVM.OpenJDK.Util.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\IKVM.OpenJDK.Util.dll"  />
+        <File Id="IKVMOpenJDKXMLAPI" Name="IKVM.OpenJDK.XML.API.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\IKVM.OpenJDK.XML.API.dll"  />
+        <File Id="IKVMRuntime" Name="IKVM.Runtime.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\IKVM.Runtime.dll"  />
+        <File Id="IKVMRuntimeJNI" Name="IKVM.Runtime.JNI.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\IKVM.Runtime.JNI.dll"  />
+        <File Id="Log4Net" Name="log4net.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\log4net.dll"  />
+        <File Id="MahAppsMetro" Name="MahApps.Metro.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\MahApps.Metro.dll"  />
+        <File Id="MicrosoftPracticesServiceLocation" Name="Microsoft.Practices.ServiceLocation.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\Microsoft.Practices.ServiceLocation.dll"  />
+        <File Id="MicrosoftPracticesUnityConfiguration" Name="Microsoft.Practices.Unity.Configuration.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\Microsoft.Practices.Unity.Configuration.dll"  />
+        <File Id="MicrosoftPracticesUnity" Name="Microsoft.Practices.Unity.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\Microsoft.Practices.Unity.dll"  />
+        <File Id="MicrosoftPracticesUnityInterception" Name="Microsoft.Practices.Unity.Interception.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\Microsoft.Practices.Unity.Interception.dll"  />
+        <File Id="MicrosoftPracticesUnityRegistrationByConvention" Name="Microsoft.Practices.Unity.RegistrationByConvention.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\Microsoft.Practices.Unity.RegistrationByConvention.dll"  />
+        <File Id="MicrosoftThreadingTasks" Name="Microsoft.Threading.Tasks.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\Microsoft.Threading.Tasks.dll"  />
+        <File Id="MicrosoftThreadingTasksExtensionsDesktop" Name="Microsoft.Threading.Tasks.Extensions.Desktop.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\Microsoft.Threading.Tasks.Extensions.Desktop.dll"  />
+        <File Id="MicrosoftThreadingTasksExtensions" Name="Microsoft.Threading.Tasks.Extensions.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\Microsoft.Threading.Tasks.Extensions.dll"  />
+        <File Id="NewtonsoftJson" Name="Newtonsoft.Json.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\Newtonsoft.Json.dll"  />
+        <File Id="Prism" Name="Prism.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\Prism.dll"  />
+        <File Id="PrismUnityWpf" Name="Prism.Unity.Wpf.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\Prism.Unity.Wpf.dll"  />
+        <File Id="PrismWpf" Name="Prism.Wpf.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\Prism.Wpf.dll"  />
+        <File Id="SystemNetHttpExtensions" Name="System.Net.Http.Extensions.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\System.Net.Http.Extensions.dll"  />
+        <File Id="SystemNetHttpPrimitives" Name="System.Net.Http.Primitives.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\System.Net.Http.Primitives.dll"  />
+        <File Id="SystemWindowsInteractivity" Name="System.Windows.Interactivity.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\System.Windows.Interactivity.dll"  />
+        <File Id="ZlibPortable" Name="Zlib.Portable.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\Zlib.Portable.dll"  />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

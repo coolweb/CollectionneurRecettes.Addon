@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectionneurRecettes.Addon.Client", "CollectionneurRecettes.Addon.Client\CollectionneurRecettes.Addon.Client.csproj", "{80002879-EC1F-4CCC-B9D0-C34CE3D99878}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectionneurRecettes.Addon", "CollectionneurRecettes.Addon\CollectionneurRecettes.Addon.csproj", "{3466439B-B963-4E91-9D76-D3F2293D6EF1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Binaries", "Binaries", "{C6B01E3E-CCEF-4E07-A65C-DC417D677AAA}"
+	ProjectSection(SolutionItems) = preProject
+		binaries\h2-latest.dll = binaries\h2-latest.dll
+		binaries\H2Sharp.dll = binaries\H2Sharp.dll
+	EndProjectSection
+EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "CollectionneurRecettes.Addon.Setup", "CollectionneurRecettes.Addon.Setup\CollectionneurRecettes.Addon.Setup.wixproj", "{8DBAEC2B-8745-4577-8548-F08A902F41A8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{80002879-EC1F-4CCC-B9D0-C34CE3D99878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80002879-EC1F-4CCC-B9D0-C34CE3D99878}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80002879-EC1F-4CCC-B9D0-C34CE3D99878}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{80002879-EC1F-4CCC-B9D0-C34CE3D99878}.Debug|x86.Build.0 = Debug|Any CPU
+		{80002879-EC1F-4CCC-B9D0-C34CE3D99878}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80002879-EC1F-4CCC-B9D0-C34CE3D99878}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80002879-EC1F-4CCC-B9D0-C34CE3D99878}.Release|x86.ActiveCfg = Release|Any CPU
+		{80002879-EC1F-4CCC-B9D0-C34CE3D99878}.Release|x86.Build.0 = Release|Any CPU
+		{3466439B-B963-4E91-9D76-D3F2293D6EF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3466439B-B963-4E91-9D76-D3F2293D6EF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3466439B-B963-4E91-9D76-D3F2293D6EF1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3466439B-B963-4E91-9D76-D3F2293D6EF1}.Debug|x86.Build.0 = Debug|Any CPU
+		{3466439B-B963-4E91-9D76-D3F2293D6EF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3466439B-B963-4E91-9D76-D3F2293D6EF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3466439B-B963-4E91-9D76-D3F2293D6EF1}.Release|x86.ActiveCfg = Release|Any CPU
+		{3466439B-B963-4E91-9D76-D3F2293D6EF1}.Release|x86.Build.0 = Release|Any CPU
+		{8DBAEC2B-8745-4577-8548-F08A902F41A8}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{8DBAEC2B-8745-4577-8548-F08A902F41A8}.Debug|x86.ActiveCfg = Debug|x86
+		{8DBAEC2B-8745-4577-8548-F08A902F41A8}.Debug|x86.Build.0 = Debug|x86
+		{8DBAEC2B-8745-4577-8548-F08A902F41A8}.Release|Any CPU.ActiveCfg = Release|x86
+		{8DBAEC2B-8745-4577-8548-F08A902F41A8}.Release|x86.ActiveCfg = Release|x86
+		{8DBAEC2B-8745-4577-8548-F08A902F41A8}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
