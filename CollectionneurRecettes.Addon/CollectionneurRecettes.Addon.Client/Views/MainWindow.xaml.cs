@@ -96,6 +96,8 @@ namespace CollectionneurRecettes.Addon.Client.Views
                 RegionManager.SetRegionManager(this.Flyout, regionManager);
 
                 this.Closing += this.MainWindow_Closing;
+
+                this.Visibility = Visibility.Hidden;
             }
         }
 
