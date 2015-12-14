@@ -16,7 +16,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <TextBlock Text="Collectionneur de Recettes Addon" Grid.Row="1" HorizontalAlignment="Center" FontSize="16" FontFamily="Segoe UI Semibold" Foreground="#FF000000" />
-        <TextBlock Text="Version Beta 0.1" Grid.Row="2" HorizontalAlignment="Center" FontSize="16" FontFamily="Segoe UI Semibold" Foreground="#FF000000" />
+        <TextBlock Text="Version Beta 0.2" Grid.Row="2" HorizontalAlignment="Center" FontSize="16" FontFamily="Segoe UI Semibold" Foreground="#FF000000" />
         <TextBlock Text="Créé par Jordens Christophe" Grid.Row="3" HorizontalAlignment="Center" FontSize="16" FontFamily="Segoe UI Semibold" Foreground="#FF000000" />
     </Grid>
 </UserControl>
