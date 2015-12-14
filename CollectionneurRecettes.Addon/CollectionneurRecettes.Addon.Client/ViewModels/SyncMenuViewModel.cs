@@ -134,7 +134,10 @@ namespace CollectionneurRecettes.Addon.Client.ViewModels
                             if (result.Exception != null)
                             {
                                 this.SyncState = "Erreur de la synchronisation";
-                                this.eventAggregator.GetEvent<Events.DisplayErrorMessageEvent>().Publish("Impossible de créer le menu dans votre calendrier google, vérifier que vous avez une connexion réseau et que vos paramètres soient correctes.");
+                                this.eventAggregator.GetEvent<Events.DisplayErrorMessageEvent>().Publish(new Events.DisplayErrorMessageEventArgs()
+                                {
+                                    Message = "Impossible de créer le menu dans votre calendrier google, vérifier que vous avez une connexion réseau et que vos paramètres soient correctes."
+                                });
                             }
                             else
                             {
@@ -170,7 +173,10 @@ namespace CollectionneurRecettes.Addon.Client.ViewModels
                             break;
                     }
 
-                    this.eventAggregator.GetEvent<Events.DisplayErrorMessageEvent>().Publish(errorMsg);
+                    this.eventAggregator.GetEvent<Events.DisplayErrorMessageEvent>().Publish(new Events.DisplayErrorMessageEventArgs()
+                    {
+                        Message = errorMsg
+                    });
                 }
             }
         }

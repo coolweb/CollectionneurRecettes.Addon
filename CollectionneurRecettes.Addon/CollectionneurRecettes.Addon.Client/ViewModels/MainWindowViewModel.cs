@@ -102,27 +102,29 @@ namespace CollectionneurRecettes.Addon.Client.ViewModels
 
                 this.checkAppRunningTimer = new Timer((state) =>
                 {
-                    // TODO: check if we can sync
-                    if (this.collectorReceiptManager.IsCollectorReceiptAppRunning())
+                    if (this.collectorReceiptManager.CanSync() == Entity.CanNotSyncReason.None)
                     {
-                        if (!this.isAppCollectorAlreadyRunning)
+                        if (this.collectorReceiptManager.IsCollectorReceiptAppRunning())
                         {
-                            // the app is not running before, so show notification
-                            this.eventAggregator.GetEvent<Events.DisplayNotificationMessageEvent>().Publish("Application collectionneur de recettes détectées, en attente de fermeture pour synchronisation");
-                            this.isAppCollectorAlreadyRunning = true;
+                            if (!this.isAppCollectorAlreadyRunning)
+                            {
+                                // the app is not running before, so show notification
+                                this.eventAggregator.GetEvent<Events.DisplayNotificationMessageEvent>().Publish("Application collectionneur de recettes détectées, en attente de fermeture pour synchronisation");
+                                this.isAppCollectorAlreadyRunning = true;
+                            }
                         }
-                    }
-                    else
-                    {
-                        if (this.isAppCollectorAlreadyRunning)
+                        else
                         {
-                            // the app was running, so launch sync
-                            // TODO: launch sync
-                            var regionManager = ServiceLocator.Current.GetInstance<Prism.Regions.IRegionManager>();
-                            regionManager.RequestNavigate("MainRegion", new Uri("SyncMenuView", UriKind.Relative));
-                            this.eventAggregator.GetEvent<Events.StartSyncEvent>().Publish(null);
-                            this.eventAggregator.GetEvent<Events.DisplayNotificationMessageEvent>().Publish("Application collectionneur de recettes fermée, début de la synchronisation");
-                            this.isAppCollectorAlreadyRunning = false;
+                            if (this.isAppCollectorAlreadyRunning)
+                            {
+                                // the app was running, so launch sync
+                                // TODO: launch sync
+                                var regionManager = ServiceLocator.Current.GetInstance<Prism.Regions.IRegionManager>();
+                                regionManager.RequestNavigate("MainRegion", new Uri("SyncMenuView", UriKind.Relative));
+                                this.eventAggregator.GetEvent<Events.StartSyncEvent>().Publish(null);
+                                this.eventAggregator.GetEvent<Events.DisplayNotificationMessageEvent>().Publish("Application collectionneur de recettes fermée, début de la synchronisation");
+                                this.isAppCollectorAlreadyRunning = false;
+                            }
                         }
                     }
 
@@ -136,7 +138,11 @@ namespace CollectionneurRecettes.Addon.Client.ViewModels
                 {
                     if (!this.googleManager.SecretFileExists())
                     {
-                        this.eventAggregator.GetEvent<Events.DisplayErrorMessageEvent>().Publish("Veuillez créer votre fichier client_secrets.json, placez le dans %appdata%\\CollectionneurRecettes.Addon\n et redémarrez l'application");
+                        this.eventAggregator.GetEvent<Events.DisplayErrorMessageEvent>().Publish(new Events.DisplayErrorMessageEventArgs()
+                        {
+                            Message = "Veuillez créer votre fichier client_secrets.json, placez le dans " + Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\CollectionneurRecettes.Addon\n et redémarrez l'application",
+                            CloseApplication = true
+                        });
                     }
                 });
             });

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CollectionneurRecettes.Addon.Client.Events
 {
-    public class DisplayErrorMessageEvent : PubSubEvent<DisplayErrorMessageEventArgs>
+    public class ExitApplicationEvent : PubSubEvent<object>
     {
     }
 }

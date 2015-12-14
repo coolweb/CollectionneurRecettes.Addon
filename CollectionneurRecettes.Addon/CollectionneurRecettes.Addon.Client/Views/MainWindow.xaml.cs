@@ -38,17 +38,26 @@ namespace CollectionneurRecettes.Addon.Client.Views
             }
 
             this.eventAggregator = eventAggregator;
-            this.eventAggregator.GetEvent<Events.DisplayErrorMessageEvent>().Subscribe(new Action<string>((message) =>
+            this.eventAggregator.GetEvent<Events.DisplayErrorMessageEvent>().Subscribe(new Action<Events.DisplayErrorMessageEventArgs>((args) =>
             {
                 this.Dispatcher.Invoke(() =>
                 {
                     if (this.Visibility == Visibility.Visible && this.IsLoaded)
                     {
-                        this.ShowMessageAsync("Collectionneur recettes Addon", message);
+                        this.ShowMessageAsync("Collectionneur recettes Addon", args.Message).ContinueWith((result)=>
+                        {
+                            if (args.CloseApplication)
+                            {
+                                this.Dispatcher.Invoke(() =>
+                                {
+                                    Application.Current.Shutdown();
+                                });
+                            }
+                        });
                     }
                     else
                     {
-                        this.myNotifyIcon.ShowBalloonTip("Collectionneur recettes Addon", message, Hardcodet.Wpf.TaskbarNotification.BalloonIcon.Error);
+                        this.myNotifyIcon.ShowBalloonTip("Collectionneur recettes Addon", args.Message, Hardcodet.Wpf.TaskbarNotification.BalloonIcon.Error);
                     }
                 });
             }));
@@ -80,6 +89,11 @@ namespace CollectionneurRecettes.Addon.Client.Views
             {
                 this.Visibility = Visibility.Visible;
                 this.WindowState = WindowState.Maximized;
+            });
+
+            this.eventAggregator.GetEvent<Events.ExitApplicationEvent>().Subscribe((o) =>
+            {
+                Application.Current.Shutdown();
             });
 
             this.Loaded += this.MainWindow_Loaded;

@@ -181,6 +181,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ClientModule.cs" />
+    <Compile Include="Events\DisplayErrorMessageEventArgs.cs" />
+    <Compile Include="Events\ExitApplicationEvent.cs" />
     <Compile Include="Events\ActivateWindowEvent.cs" />
     <Compile Include="Events\StartSyncEvent.cs" />
     <Compile Include="Events\DataChangedEvent.cs" />

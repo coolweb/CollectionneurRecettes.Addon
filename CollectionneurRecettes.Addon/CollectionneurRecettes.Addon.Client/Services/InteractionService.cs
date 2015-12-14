@@ -38,7 +38,10 @@ namespace CollectionneurRecettes.Addon.Client.Services
 
         public void ShowErrorDialog(string message)
         {
-            this.eventAggregator.GetEvent<Events.DisplayErrorMessageEvent>().Publish(message);
+            this.eventAggregator.GetEvent<Events.DisplayErrorMessageEvent>().Publish(new Events.DisplayErrorMessageEventArgs()
+            {
+                Message = message
+            });
         }
 
         public void ShowSuccessDialog(string message)

@@ -23,7 +23,7 @@ namespace CollectionneurRecettes.Addon.Repository
         public async Task<UserCredential> Authorize()
         {
             UserCredential credential;
-            using (var stream = new FileStream("client_secrets.json", FileMode.Open, FileAccess.Read))
+            using (var stream = new FileStream(this.clientSecretFile, FileMode.Open, FileAccess.Read))
             {
                 credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
                     GoogleClientSecrets.Load(stream).Secrets,
