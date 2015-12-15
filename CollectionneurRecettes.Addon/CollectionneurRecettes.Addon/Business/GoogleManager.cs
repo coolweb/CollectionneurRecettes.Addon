@@ -79,13 +79,31 @@ namespace CollectionneurRecettes.Addon.Business
 
             foreach (var day in menu.Days)
             {
+                var daySummary = string.Empty;
+
                 foreach (var receipt in day.Receipts)
+                {
+                    daySummary += receipt.Name +"\n";
+                    
+                    count++;
+
+                    if (progress != null)
+                    {
+                        progress.Report(new ProgressCreateMenus()
+                        {
+                            ReceiptCreated = count,
+                            ReceiptToCreate = receiptToCreate
+                        });
+                    }
+                }
+
+                if (daySummary != string.Empty)
                 {
                     // search receipt in google calendar
                     var eventInGoogleCalendar = events.Items.Where((e) =>
                     {
                         return e.ExtendedProperties.Private__.Any(prop => prop.Key == "AppName" && prop.Value == appName) &&
-                        e.Summary == receipt.Name &&                        
+                        e.Description == daySummary &&
                         e.Start.Date == day.Date.ToString("yyyy-MM-dd") &&
                         e.End.Date == day.Date.ToString("yyyy-MM-dd");
                     });
@@ -97,7 +115,8 @@ namespace CollectionneurRecettes.Addon.Business
                         {
                             Start = new EventDateTime() { Date = day.Date.ToString("yyyy-MM-dd") },
                             End = new EventDateTime() { Date = day.Date.ToString("yyyy-MM-dd") },
-                            Summary = receipt.Name,
+                            Description = daySummary,
+                            Summary = "Menu du jour",
                             ExtendedProperties = new Event.ExtendedPropertiesData()
                             {
                                 Private__ = new Dictionary<string, string>()
@@ -109,17 +128,6 @@ namespace CollectionneurRecettes.Addon.Business
                             credential,
                             this.settingsManager.LoadSettings().CalendarId,
                             eventGoogle);
-                    }
-
-                    count++;
-
-                    if (progress != null)
-                    {
-                        progress.Report(new ProgressCreateMenus()
-                        {
-                            ReceiptCreated = count,
-                            ReceiptToCreate = receiptToCreate
-                        });
                     }
                 }
             }

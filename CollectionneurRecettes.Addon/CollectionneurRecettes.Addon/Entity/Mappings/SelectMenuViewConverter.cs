@@ -14,16 +14,19 @@ namespace CollectionneurRecettes.Addon.Entity.Mappings
             var source = context.SourceValue as Data.SelectMenuView;
 
             var result = new Menu();
+            var day = new Day();
             foreach (var row in source.Rows)
             {
-                var day = new Day();
-                day.Date = row.Date;
+                if (row.Date.Date != day.Date.Date)
+                {
+                    day = new Day();
+                    day.Date = row.Date;
+                    result.Days.Add(day);
+                }
 
                 var receipt = new Receipt();
                 receipt.Name = row.ReceiptTitle;
-                day.Receipts.Add(receipt);
-
-                result.Days.Add(day);
+                day.Receipts.Add(receipt);                
             }
 
             return result;

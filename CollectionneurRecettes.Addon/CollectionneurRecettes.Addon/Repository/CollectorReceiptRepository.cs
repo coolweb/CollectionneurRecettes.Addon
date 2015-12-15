@@ -27,7 +27,8 @@ namespace CollectionneurRecettes.Addon.Repository
             var query = "select menu.day, recipes.title from menu, recipes " +
                         " where recipes.cidrecipe = menu.cidrecipe" +
                         " and menu.day >= '" + from.ToString("yyyy-MM-dd") +
-                        "' and menu.day <= '" + to.ToString("yyyy-MM-dd") + "'";
+                        "' and menu.day <= '" + to.ToString("yyyy-MM-dd") + "'" +
+                        "order by menu.day asc";
 
             var selectResult = this.h2Database.ExecuteSelectQuery(connectionString, query);
             var result = new SelectMenuView();
