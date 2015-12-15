@@ -103,14 +103,33 @@ namespace CollectionneurRecettes.Addon.Business
                     var eventInGoogleCalendar = events.Items.Where((e) =>
                     {
                         return e.ExtendedProperties.Private__.Any(prop => prop.Key == "AppName" && prop.Value == appName) &&
-                        e.Description == daySummary &&
+                        e.Summary == "Menu du jour" &&
                         e.Start.Date == day.Date.ToString("yyyy-MM-dd") &&
                         e.End.Date == day.Date.ToString("yyyy-MM-dd");
                     });
 
+                    bool mustCreateEvent = false;
                     if (!eventInGoogleCalendar.Any())
                     {
-                        // event doesn't exit in google calendar
+                        // event doesn't exist, must create it
+                        mustCreateEvent = true;
+                    }
+                    else
+                    {
+                        // event exist, check if receipt have changed
+                        if (eventInGoogleCalendar.First().Description != daySummary)
+                        {
+                            // menu have changed, so delete old event
+                            googleRepository.DeleteEvent(credential, settings.CalendarId, eventInGoogleCalendar.First().Id);
+
+                            // must create the updated event
+                            mustCreateEvent = true;
+                        }
+                    }
+
+                    if (mustCreateEvent)
+                    {                        
+                        // must create the event                       
                         var eventGoogle = new Event()
                         {
                             Start = new EventDateTime() { Date = day.Date.ToString("yyyy-MM-dd") },
@@ -126,7 +145,7 @@ namespace CollectionneurRecettes.Addon.Business
 
                         var createdEvent = await this.googleRepository.CreateEvent(
                             credential,
-                            this.settingsManager.LoadSettings().CalendarId,
+                            settings.CalendarId,
                             eventGoogle);
                     }
                 }

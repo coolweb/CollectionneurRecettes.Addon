@@ -66,7 +66,7 @@ namespace CollectionneurRecettes.Addon.Repository
             var calendarListResource = service.CalendarList.List();
             var calendarList = calendarListResource.Execute();
             var calendars = new List<Entity.Calendar>();
-            
+
             while (nextCalendar)
             {
                 calendars.AddRange(
@@ -78,7 +78,7 @@ namespace CollectionneurRecettes.Addon.Repository
                             Name = calendar.Summary
                         };
                     }));
-                
+
                 if (!string.IsNullOrEmpty(calendarList.NextPageToken))
                 {
                     // next page
@@ -117,7 +117,7 @@ namespace CollectionneurRecettes.Addon.Repository
                 HttpClientInitializer = credential,
                 ApplicationName = this.googleApplicationName
             });
-            
+
             var request = service.Events.Insert(eventToCreate, calendarId);
             return request.ExecuteAsync();
         }
@@ -151,6 +151,32 @@ namespace CollectionneurRecettes.Addon.Repository
             filter.TimeMin = startDate.AddDays(-1);
 
             return await filter.ExecuteAsync();
+        }
+
+        public void DeleteEvent(UserCredential credential, string calendarId, string eventId)
+        {
+            if (credential == null)
+            {
+                throw new ArgumentNullException("credential");
+            }
+
+            if (string.IsNullOrEmpty(calendarId))
+            {
+                throw new ArgumentNullException("calendarId");
+            }
+
+            if (string.IsNullOrEmpty(eventId))
+            {
+                throw new ArgumentNullException("eventId");
+            }
+
+            var service = new CalendarService(new Google.Apis.Services.BaseClientService.Initializer()
+            {
+                HttpClientInitializer = credential,
+                ApplicationName = this.googleApplicationName
+            });
+
+            service.Events.Delete(calendarId, eventId).Execute();
         }
     }
 }

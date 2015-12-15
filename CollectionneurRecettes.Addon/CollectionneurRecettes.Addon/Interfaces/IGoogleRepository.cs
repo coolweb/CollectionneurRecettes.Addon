@@ -17,5 +17,6 @@ namespace CollectionneurRecettes.Addon.Interfaces
         IEnumerable<Entity.Calendar> RetrieveCalendars(UserCredential credential);
         Task<Event> CreateEvent(UserCredential credential, string calendarId, Event eventToCreate);
         Task<Events> FilterEvents(UserCredential credential, string calendarId, DateTime startDate, DateTime endDate, IDictionary<string, string> extendedProperties);
+        void DeleteEvent(UserCredential credential, string calendarId, string eventId);
     }
 }
