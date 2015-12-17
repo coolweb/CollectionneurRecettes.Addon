@@ -38,7 +38,6 @@
           <Shortcut Id="startmenuManual" Directory="ProgramMenuDir" Name="Collectionneur Addon" Advertise="yes" Icon="Client.exe" IconIndex="0" />
         </File>        
         <File Id="AutoMapper" Name="AutoMapper.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\AutoMapper.dll"  />
-        <File Id="clientSecrets" Name="client_secrets.json" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\client_secrets.json"  />
         <File Id="CollectionneurRecettesAddonClientExeConfig" Name="CollectionneurRecettes.Addon.Client.exe.config" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\CollectionneurRecettes.Addon.Client.exe.config"  />
         <File Id="CollectionneurRecettesAddon" Name="CollectionneurRecettes.Addon.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\CollectionneurRecettes.Addon.dll"  />
         <File Id="GoogleApisAuth" Name="Google.Apis.Auth.dll" Source="..\CollectionneurRecettes.Addon.Client\bin\Release\Google.Apis.Auth.dll"  />
