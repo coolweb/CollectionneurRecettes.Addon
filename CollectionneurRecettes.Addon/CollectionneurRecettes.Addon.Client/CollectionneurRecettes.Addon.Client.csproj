@@ -194,9 +194,7 @@
     <Compile Include="Services\DispatcherService.cs" />
     <Compile Include="Services\IDispatcherService.cs" />
     <Compile Include="Services\IInteractionService.cs" />
-    <Compile Include="Services\ILoggerService.cs" />
     <Compile Include="Services\InteractionService.cs" />
-    <Compile Include="Services\LoggerService.cs" />
     <Compile Include="UnityBootstrapper.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ParametersViewModel.cs" />

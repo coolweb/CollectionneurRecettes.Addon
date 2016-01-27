@@ -1,21 +1,32 @@
-﻿
+﻿// <copyright file="AddonModule.cs" company="No company">
+// 2016 GNU license
+// </copyright>
+// <author>Jordens Christophe</author>
 
 namespace CollectionneurRecettes.Addon
 {
+    using System;
     using AutoMapper;
     using Microsoft.Practices.ServiceLocation;
     using Microsoft.Practices.Unity;
     using Prism.Modularity;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
+    /// <summary>
+    /// Configures the module.
+    /// </summary>
+    /// <seealso cref="Prism.Modularity.IModule" />
     public class AddonModule : IModule
     {
+        /// <summary>
+        /// The container
+        /// </summary>
         private IUnityContainer container;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AddonModule"/> class.
+        /// </summary>
+        /// <param name="container">The container.</param>
+        /// <exception cref="System.ArgumentNullException">container is null</exception>
         public AddonModule(IUnityContainer container)
         {
             if (container == null)
@@ -26,8 +37,14 @@ namespace CollectionneurRecettes.Addon
             this.container = container;
         }
 
+        /// <summary>
+        /// Initialize the module.
+        /// </summary>
         public void Initialize()
         {
+            // Cross Cutting
+            this.container.RegisterType<CrossCutting.ILoggerService, CrossCutting.LoggerService>();
+
             // Data layer
             this.container.RegisterType<Interfaces.IDataSettings, Repository.DataSettings>();
             this.container.RegisterType<Interfaces.IH2Database, Repository.H2Database>();

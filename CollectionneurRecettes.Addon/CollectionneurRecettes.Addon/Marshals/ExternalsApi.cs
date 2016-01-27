@@ -1,14 +1,19 @@
-﻿
+﻿// <copyright file="ExternalsApi.cs" company="No company">
+// 2016 GNU license
+// </copyright>
+// <author>Jordens Christophe</author>
+
 namespace CollectionneurRecettes.Addon.Marshals
 {
     using System.Runtime.InteropServices;
+
     /// <summary>
     /// External win 32 Api.
     /// </summary>
     public static class ExternalsApi
     {
         [DllImport("wininet.dll")]
-        private extern static bool InternetGetConnectedState(out int connDescription, int ReservedValue);
+        private static extern bool InternetGetConnectedState(out int connDescription, int ReservedValue);
 
         /// <summary>
         /// Check if a connection to the Internet can be established

@@ -144,6 +144,8 @@
     <Compile Include="Business\CollectorReceiptManager.cs" />
     <Compile Include="Business\GoogleManager.cs" />
     <Compile Include="Business\SettingsManager.cs" />
+    <Compile Include="CrossCutting\ILoggerService.cs" />
+    <Compile Include="CrossCutting\LoggerService.cs" />
     <Compile Include="Entity\Calendar.cs" />
     <Compile Include="Entity\CanNotSyncReason.cs" />
     <Compile Include="Entity\Data\SelectMenuView.cs" />
@@ -173,6 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="CollectionneurRecettes.Addon.licenseheader" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

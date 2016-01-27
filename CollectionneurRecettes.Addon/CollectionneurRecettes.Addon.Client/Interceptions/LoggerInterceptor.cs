@@ -9,7 +9,7 @@ namespace CollectionneurRecettes.Addon.Client.Interceptions
 {
     public class LoggerInterceptor : IInterceptionBehavior
     {
-        public Services.ILoggerService LoggerService { get; set; }
+        public CollectionneurRecettes.Addon.CrossCutting.ILoggerService LoggerService { get; set; }
 
         public bool WillExecute
         {
@@ -26,12 +26,12 @@ namespace CollectionneurRecettes.Addon.Client.Interceptions
 
         public IMethodReturn Invoke(IMethodInvocation input, GetNextInterceptionBehaviorDelegate getNext)
         {
-            this.LoggerService.LogInformation(string.Format("Info - Start: {0} with params {1}", input.MethodBase.ToString(), string.Empty));
+            this.LoggerService.LogVerbose(string.Format("Start method: {0} with params {1}", input.MethodBase.ToString(), string.Empty));
             var result = getNext()(input, getNext);
 
             if (result.Exception != null)
             {
-                this.LoggerService.LogError(string.Format("Error: {0}", result.Exception.ToString()));
+                this.LoggerService.LogVerbose(result.Exception.ToString());
             }
 
             return result;

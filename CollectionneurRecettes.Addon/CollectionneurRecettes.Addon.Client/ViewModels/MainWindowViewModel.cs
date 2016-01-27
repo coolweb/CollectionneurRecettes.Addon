@@ -13,6 +13,7 @@ namespace CollectionneurRecettes.Addon.Client.ViewModels
 {
     public class MainWindowViewModel : BindableBase, IDisposable
     {
+        private CrossCutting.ILoggerService logger;
         private Interfaces.ISettingsManager settingsManager;
         private Services.IDispatcherService dispatcherService;
         private DelegateCommand exitCommand;
@@ -24,6 +25,7 @@ namespace CollectionneurRecettes.Addon.Client.ViewModels
         private bool isAppCollectorAlreadyRunning;
 
         public MainWindowViewModel(
+            CrossCutting.ILoggerService logger,
             Interfaces.ICollectorReceiptManager collectorReceiptManager,
             Interfaces.ISettingsManager settingsManager,
             Interfaces.IGoogleManager googleManager,
@@ -55,6 +57,11 @@ namespace CollectionneurRecettes.Addon.Client.ViewModels
                 throw new ArgumentNullException("googleManager");
             }
 
+            if (logger == null)
+            {
+                throw new ArgumentNullException("logger");
+            }
+
             this.exitCommand = new DelegateCommand(new Action(() =>
             {
                 System.Windows.Application.Current.Shutdown();
@@ -84,6 +91,7 @@ namespace CollectionneurRecettes.Addon.Client.ViewModels
                 this.eventAggregator.GetEvent<Events.ActivateWindowEvent>().Publish(null);
             });
 
+            this.logger = logger;
             this.eventAggregator = eventAggregator;
             this.collectorReceiptManager = collectorReceiptManager;
             this.googleManager = googleManager;
@@ -94,6 +102,7 @@ namespace CollectionneurRecettes.Addon.Client.ViewModels
             {
                 if (string.IsNullOrEmpty(this.settingsManager.LoadSettings().CollectionneurDabasePath))
                 {
+                    this.logger.LogInformation("Application settings not set, show parameters window");
                     this.dispatcherService.Invoke(() =>
                     {
                         this.ShowParametersCommand.Execute();
@@ -138,6 +147,7 @@ namespace CollectionneurRecettes.Addon.Client.ViewModels
                 {
                     if (!this.googleManager.SecretFileExists())
                     {
+                        this.logger.LogWarning("Google json secret file doesn't exists, application will close");
                         this.eventAggregator.GetEvent<Events.DisplayErrorMessageEvent>().Publish(new Events.DisplayErrorMessageEventArgs()
                         {
                             Message = "Veuillez créer votre fichier client_secrets.json, placez le dans " + Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\CollectionneurRecettes.Addon\n et redémarrez l'application",

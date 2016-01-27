@@ -28,7 +28,6 @@ namespace CollectionneurRecettes.Addon.Client
             // Services
             this.container.RegisterType<Services.IInteractionService, Services.InteractionService>();
             this.container.RegisterType<Services.IDispatcherService, Services.DispatcherService>();
-            this.container.RegisterType<Services.ILoggerService, Services.LoggerService>();
 
             // Interception
             this.container.AddNewExtension<Interception>();
@@ -38,7 +37,7 @@ namespace CollectionneurRecettes.Addon.Client
                 {
                     return new Interceptions.LoggerInterceptor()
                     {
-                        LoggerService = this.container.Resolve<Services.ILoggerService>()
+                        LoggerService = this.container.Resolve<CollectionneurRecettes.Addon.CrossCutting.ILoggerService>()
                     };
                 }));
 
